@@ -14,7 +14,7 @@ class Transaccion:
 
 if __name__ == "__main__":
     HOST = ''
-    PORT = 8869
+    PORT = 8864
     SERVER_SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
@@ -55,6 +55,7 @@ if __name__ == "__main__":
                 cur.execute(query)
                 conexion.commit()
                 connection.send(pickle.dumps(str(cur._rows[0][0])))
+                print(str(cur._rows[0][0])
                 conexion.close()
             else:
                 query = "select USUARIO from cliente where USUARIO = '{}'".format(datos[0])
@@ -62,6 +63,7 @@ if __name__ == "__main__":
                 conexion.commit()
                 if cur._rows:
                     connection.send(pickle.dumps(str(cur._rows[0][0])))
+                    print(str(cur._rows[0][0])
                 else:
                     connection.send(pickle.dumps("error"))
                 conexion.close()
